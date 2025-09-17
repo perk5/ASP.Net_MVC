@@ -1,10 +1,26 @@
-﻿@{
+﻿@* @model ModelViewController.Models.Employee *@
+@model List<ModelViewController.Models.Employee>
+@{
     ViewData["Title"] = "Home Page";
-    var students = ViewData["EmpInfo"] as Employee;
+    // var students = ViewData["EmpInfo"] as Employee;
 }
+@* 
+<h2>@Model.EmpId</h2>
+<h2>@Model.EmpName</h2>
 
-<h1>Hello</h1>
-@students.EmpId
+<h2>@Model.Designation</h2>
+<h2>@Model.Salary</h2> *@
+
+@{
+    foreach (var mod in Model)
+    {
+        <h2>@mod.EmpId</h2>
+        <h2>@mod.EmpName</h2>
+        <h2>@mod.Designation</h2>
+        <h2>@mod.Salary</h2>
+        <h2>----------</h2>
+    }
+}
 
 @* <div class="text-center">
     <h1 class="display-4">Welcome</h1>

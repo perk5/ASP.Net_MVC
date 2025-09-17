@@ -30,25 +30,25 @@ namespace ModelViewController.Controllers
         public IActionResult Index()
         {
 
-            Employee emp = new Employee()
-            {
-                EmpId = 101,
-                EmpName = "Prerak",
-                Designation = "Manger",
-                Salary = 25000
-            };
-            ViewData["EmpInfo"] = emp;
+            //Employee emp = new Employee()
+            //{
+            //    EmpId = 101,
+            //    EmpName = "Prerak",
+            //    Designation = "Manger",
+            //    Salary = 25000
+            //};
+            //ViewData["EmpInfo"] = emp;
 
-            //List<StudentModel> studentModels = new List<StudentModel>();
-            //studentModels.Add(new StudentModel { rollNo = 1, Name = "Prerak", Gender = "Male", Standard = 5 });
-            //studentModels.Add(new StudentModel { rollNo = 2, Name = "Raj", Gender = "Male", Standard = 10 });
-            //studentModels.Add(new StudentModel { rollNo = 3, Name = "Rani", Gender = "Female", Standard = 12 });
-            //studentModels.Add(new StudentModel { rollNo = 4, Name = "Ankita", Gender = "Female", Standard = 8 });
+            List<Employee> EmployeeModels = new List<Employee>();
+            EmployeeModels.Add(new Employee { EmpId = 1, EmpName = "Prerak", Designation = "Male", Salary = 5 });
+            EmployeeModels.Add(new Employee { EmpId = 2, EmpName = "Raj", Designation = "Male", Salary = 10 });
+            EmployeeModels.Add(new Employee { EmpId = 3, EmpName = "Rani", Designation = "Female", Salary = 12 });
+            EmployeeModels.Add(new Employee { EmpId = 4, EmpName = "Ankita", Designation = "Female", Salary = 8 });
 
-            //var students = studentModels;
+            var Emp = EmployeeModels;
 
             //ViewData["MyStudents"] = students;
-            return View();
+            return View(Emp);
         }
 
         public IActionResult Privacy()
