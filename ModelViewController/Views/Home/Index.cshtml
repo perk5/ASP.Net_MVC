@@ -1,7 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
-    var students = ViewData["MyStudents"] as List<StudentModel> ;
+    var students = ViewData["EmpInfo"] as Employee;
 }
+
+<h1>Hello</h1>
+@students.EmpId
 
 @* <div class="text-center">
     <h1 class="display-4">Welcome</h1>

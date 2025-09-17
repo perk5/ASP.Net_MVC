@@ -10,7 +10,7 @@ namespace ModelViewController.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private readonly StudentRepository _studentRepository = null;
-         
+
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -29,6 +29,15 @@ namespace ModelViewController.Controllers
 
         public IActionResult Index()
         {
+
+            Employee emp = new Employee()
+            {
+                EmpId = 101,
+                EmpName = "Prerak",
+                Designation = "Manger",
+                Salary = 25000
+            };
+            ViewData["EmpInfo"] = emp;
 
             //List<StudentModel> studentModels = new List<StudentModel>();
             //studentModels.Add(new StudentModel { rollNo = 1, Name = "Prerak", Gender = "Male", Standard = 5 });
