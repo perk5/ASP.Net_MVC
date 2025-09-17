@@ -10,7 +10,7 @@ namespace ModelViewController.Controllers
         private readonly ILogger<HomeController> _logger;
 
         private readonly StudentRepository _studentRepository = null;
-
+         
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
