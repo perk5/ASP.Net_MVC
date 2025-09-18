@@ -1,9 +1,18 @@
 ﻿@* @model ModelViewController.Models.Employee *@
-@model List<ModelViewController.Models.Employee>
+@* @model List<ModelViewController.Models.Employee> *@
 @{
     ViewData["Title"] = "Home Page";
     // var students = ViewData["EmpInfo"] as Employee;
 }
+
+<a href="/Home/Contact/1">Contact Page one</a> 
+<br />
+@Html.ActionLink("Contact Page 2", "Contact", "Home", new { id = 1 })
+<br />
+<a href="@Url.Action("Contact", "Home", new { id = 1 })">Contact Page 3</a>
+<br />
+<a asp-controller="Home" asp-action="Contact" asp-route-id="1">Contact Page</a> 
+<br />
 @* 
 <h2>@Model.EmpId</h2>
 <h2>@Model.EmpName</h2>
@@ -11,7 +20,7 @@
 <h2>@Model.Designation</h2>
 <h2>@Model.Salary</h2> *@
 
-@{
+@* @{
     foreach (var mod in Model)
     {
         <h2>@mod.EmpId</h2>
@@ -20,7 +29,7 @@
         <h2>@mod.Salary</h2>
         <h2>----------</h2>
     }
-}
+} *@
 
 @* <div class="text-center">
     <h1 class="display-4">Welcome</h1>

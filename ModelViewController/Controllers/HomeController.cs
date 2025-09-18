@@ -39,16 +39,21 @@ namespace ModelViewController.Controllers
             //};
             //ViewData["EmpInfo"] = emp;
 
-            List<Employee> EmployeeModels = new List<Employee>();
-            EmployeeModels.Add(new Employee { EmpId = 1, EmpName = "Prerak", Designation = "Male", Salary = 5 });
-            EmployeeModels.Add(new Employee { EmpId = 2, EmpName = "Raj", Designation = "Male", Salary = 10 });
-            EmployeeModels.Add(new Employee { EmpId = 3, EmpName = "Rani", Designation = "Female", Salary = 12 });
-            EmployeeModels.Add(new Employee { EmpId = 4, EmpName = "Ankita", Designation = "Female", Salary = 8 });
+            //List<Employee> EmployeeModels = new List<Employee>();
+            //EmployeeModels.Add(new Employee { EmpId = 1, EmpName = "Prerak", Designation = "Male", Salary = 5 });
+            //EmployeeModels.Add(new Employee { EmpId = 2, EmpName = "Raj", Designation = "Male", Salary = 10 });
+            //EmployeeModels.Add(new Employee { EmpId = 3, EmpName = "Rani", Designation = "Female", Salary = 12 });
+            //EmployeeModels.Add(new Employee { EmpId = 4, EmpName = "Ankita", Designation = "Female", Salary = 8 });
 
-            var Emp = EmployeeModels;
+            //var Emp = EmployeeModels;
 
             //ViewData["MyStudents"] = students;
-            return View(Emp);
+            return View();
+        }
+
+        public int Contact(int id)
+        {
+            return id;
         }
 
         public IActionResult Privacy()
