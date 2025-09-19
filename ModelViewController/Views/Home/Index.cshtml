@@ -12,7 +12,14 @@
     <div class="row">
         <div class="col-sm-2">
             <form class="d-grid" asp-action="Index" asp-controller="Home" method="post">
+                <label asp-for="Name">
+                    Enter Name:
+                </label>
                 <input  asp-for="Name" placeholder="Enter name" class="form-control">
+                <br />
+                <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()">
+                    <option value="">Select Gender</option>
+                </select>
                 <br />
                 <input asp-for="Age" placeholder="Enter Age" class="form-control">
                 <br />
@@ -21,6 +28,27 @@
                 <input asp-for="Salary" placeholder="Enter Salary" class="form-control">
                 <br /> 
                 <input type="submit" name="name" value="Submit" class="btn btn-outline-primary btn-block"/>
+                <br />
+
+                <label>
+                    Married:
+                </label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="Married" value="Yes">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Yes
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" asp-for="Married" value="No">
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        No
+                    </label>
+                </div>
+
+                <textarea placeholder="Enter description" asp-for="Description" class="form-control">
+
+                </textarea>
             </form>
         </div>
     </div>
