@@ -27,6 +27,7 @@ namespace ModelViewController.Controllers
             return _studentRepository.getStudentById(id);
         }
 
+        [Route("")]
         public IActionResult Index()
         {
 
