@@ -1,16 +1,22 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-/// <summary>
-/// Summary description for Class1
-/// </summary>
-public class StudentModel
+
+namespace ModelViewController.Models
 {
-    public int rollNo { get; set; }
+    /// <summary>
+    /// Summary description for Class1
+    /// </summary>
+    public class StudentModel
+    {
+        //public int rollNo { get; set; }
+        [Required(ErrorMessage ="Please Enter Correct Name")]
+        [StringLength(15, MinimumLength = 3)]
+        public string Name { get; set; }
 
-    public string Name { get; set; }
+        //public string Gender { get; set; }
 
-    public string Gender { get; set; }
+        //public int Standard { get; set; }
 
-    public int Standard { get; set; }
-
+    }
 }

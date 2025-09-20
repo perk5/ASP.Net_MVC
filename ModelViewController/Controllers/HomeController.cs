@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ModelViewController.Models;
-using ModelViewController.Repository;
+//using ModelViewController.Repository;
 using System.Diagnostics;
 
 namespace ModelViewController.Controllers
@@ -9,23 +9,23 @@ namespace ModelViewController.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        private readonly StudentRepository _studentRepository = null;
+        //private readonly StudentRepository _studentRepository = null;
 
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            this._studentRepository = new StudentRepository();
+            //this._studentRepository = new StudentRepository();
         }
 
-        public List<StudentModel> getAllStudents()
-        {
-            return _studentRepository.getAllStudent();
-        }
+        //public List<StudentModel> getAllStudents()
+        //{
+        //    return _studentRepository.getAllStudent();
+        //}
 
-        public StudentModel getStudentById(int id)
-        {
-            return _studentRepository.getStudentById(id);
-        }
+        //public StudentModel getStudentById(int id)
+        //{
+        //    return _studentRepository.getStudentById(id);
+        //}
 
         
         public IActionResult Index()
@@ -52,10 +52,23 @@ namespace ModelViewController.Controllers
             return View();
         }
 
+
+
         [HttpPost]
-        public string Index(Employee emp)
+        public IActionResult Index(StudentModel sm)
         {
-            return "Name: " + emp.Name + " Salary: " + emp.Salary + " Age: " + emp.Age + " Gender: " + emp.Gender + " Designation: " + emp.Designation + " Married: " + emp.Married + " Description: " + emp.Description;
+            return View();
+            //return "Name: " + emp.Name + " Salary: " + emp.Salary + " Age: " + emp.Age + " Gender: " + emp.Gender + " Designation: " + emp.Designation + " Married: " + emp.Married + " Description: " + emp.Description;
+            //if (ModelState.IsValid)
+            //{
+            //    return "Form sent successfully Name is " + sm.Name;
+            //}
+            //else
+            //{
+            //    return "There was a problem sending the form....";
+            //}
+
+                
         }
 
         public string Details(int id,  string name)
@@ -63,10 +76,10 @@ namespace ModelViewController.Controllers
             return "Id is: " + id + " Name is: " + name;
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
+        //public IActionResult Privacy()
+        //{
+        //    return View();
+        //}
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
