@@ -27,7 +27,7 @@ namespace ModelViewController.Controllers
             return _studentRepository.getStudentById(id);
         }
 
-        [Route("")]
+        
         public IActionResult Index()
         {
 
@@ -52,9 +52,15 @@ namespace ModelViewController.Controllers
             return View();
         }
 
-        public int Contact(int id)
+        [HttpPost]
+        public string Index(Employee emp)
         {
-            return id;
+            return "Name: " + emp.Name + " Salary: " + emp.Salary + " Age: " + emp.Age + " Gender: " + emp.Gender + " Designation: " + emp.Designation + " Married: " + emp.Married + " Description: " + emp.Description;
+        }
+
+        public string Details(int id,  string name)
+        {
+            return "Id is: " + id + " Name is: " + name;
         }
 
         public IActionResult Privacy()

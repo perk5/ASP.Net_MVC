@@ -10,7 +10,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-2">
+        <div class="col-sm-4">
             <form class="d-grid" asp-action="Index" asp-controller="Home" method="post">
                 <label asp-for="Name">
                     Enter Name:
@@ -27,9 +27,6 @@
                 <br />
                 <input asp-for="Salary" placeholder="Enter Salary" class="form-control">
                 <br /> 
-                <input type="submit" name="name" value="Submit" class="btn btn-outline-primary btn-block"/>
-                <br />
-
                 <label>
                     Married:
                 </label>
@@ -49,6 +46,9 @@
                 <textarea placeholder="Enter description" asp-for="Description" class="form-control">
 
                 </textarea>
+                <br />
+
+                <input type="submit" name="name" value="Submit" class="btn btn-outline-primary btn-block" />
             </form>
         </div>
     </div>
