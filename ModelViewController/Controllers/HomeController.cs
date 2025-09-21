@@ -57,6 +57,12 @@ namespace ModelViewController.Controllers
         [HttpPost]
         public IActionResult Index(StudentModel sm)
         {
+
+            if (ModelState.IsValid)
+            {
+                ModelState.Clear();
+            }
+
             return View();
             //return "Name: " + emp.Name + " Salary: " + emp.Salary + " Age: " + emp.Age + " Gender: " + emp.Gender + " Designation: " + emp.Designation + " Married: " + emp.Married + " Description: " + emp.Description;
             //if (ModelState.IsValid)
