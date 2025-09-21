@@ -22,6 +22,10 @@ namespace ModelViewController.Models
         [Range(10, 50, ErrorMessage = "Age must between 10 and 50")]
         public int? Age { get; set; }
 
+        [Required(ErrorMessage = "Password is Must")]
+        [RegularExpression("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "Password must contain 1 capital and 1 special character")]
+        public string Password { get; set; }
+
         //public string Gender { get; set; }
 
         //public int Standard { get; set; }
