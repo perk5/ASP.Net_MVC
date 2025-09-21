@@ -1,139 +1,53 @@
-﻿@* @model ModelViewController.Models.Employee *@
-@* @model List<ModelViewController.Models.Employee> *@
-@model ModelViewController.Models.StudentModel
+﻿@model IEnumerable<ModelViewController.Models.StudentModel>
+
 @{
-    ViewData["Title"] = "Home Page";
-    // var students = ViewData["EmpInfo"] as Employee;
-}       
+    ViewData["Title"] = "Index";
+}
 
+<h1>Index</h1>
 
-
-<div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <div asp-validation-summary ="All">
-
-            </div>
-            
-            <form class="d-grid" asp-action="Index" asp-controller="Home" method="post">
-                
-                <input asp-for="Name" class="form-control" value="" placeholder="Enter Name"/>
-                @* <span asp-validation-for="Name" style="color:red;"></span> *@
-                <br />
-                <input asp-for="Email" class="form-control" value="" placeholder="Enter Email"/>
-                @* /* <span asp-validation-for="Email" style="color:red;"></span> */ *@
-                <br />
-                <input asp-for="Age" class="form-control" value="" placeholder="Enter Age" />
-                @* <span asp-validation-for="Age" style="color:red;"></span> *@
-                <br />
-                @* <br />
-                <input asp-for="Password" class="form-control" value="" />
-                <span asp-validation-for="Password" style="color:red;"></span>
-                <br />
-                <input asp-for="ConfirmPassword" class="form-control" value="" />
-                <span asp-validation-for="ConfirmPassword" style="color:red;"></span>
-                <br />
-                <input asp-for="WebsiteUrl" class="form-control" value="" />
-                <span asp-validation-for="WebsiteUrl" style="color:red;"></span>
-                <br /> *@
-                <input type="submit" name="name" value="Submit" class="btn btn-outline-primary btn-block" />
-            </form>
-        </div>
-    </div>
-</div>
-                @* <label asp-for="Name">
-                    Enter Name:
-                </label>
-                <input  asp-for="Name" placeholder="Enter name" class="form-control">
-                <br />
-                <select asp-for="Gender" class="form-control" asp-items="Html.GetEnumSelectList<Gender>()">
-                    <option value="">Select Gender</option>
-                </select>
-                <br />
-                <input asp-for="Age" placeholder="Enter Age" class="form-control">
-                <br />
-                <input asp-for="Designation" placeholder="Enter Designation" class="form-control">
-                <br />
-                <input asp-for="Salary" placeholder="Enter Salary" class="form-control">
-                <br /> 
-                <label>
-                    Married:
-                </label>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" asp-for="Married" value="Yes">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Yes
-                    </label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" asp-for="Married" value="No">
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        No
-                    </label>
-                </div>
-
-                <textarea placeholder="Enter description" asp-for="Description" class="form-control">
-
-                </textarea>
-                <br />
-
-                <input type="submit" name="name" value="Submit" class="btn btn-outline-primary btn-block" />
-            
-        </div>
-    </div>
-</div>
-
-@* 
-<img style="width:150px" asp-append-version="true" src="~/images/spider.png" alt="image1" /> *@
-
-
-@* <a href="/Home/Contact/1">Contact Page one</a> 
-<br />
-@Html.ActionLink("Contact Page 2", "Contact", "Home", new { id = 1 })
-<br />
-<a href="@Url.Action("Contact", "Home", new { id = 1 })">Contact Page 3</a>
-<br />
-<a asp-controller="Home" asp-action="Contact" asp-route-id="1">Contact Page</a> 
-<br /> *@
-@* 
-<h2>@Model.EmpId</h2>
-<h2>@Model.EmpName</h2>
-
-<h2>@Model.Designation</h2>
-<h2>@Model.Salary</h2> *@
-
-@* @{
-    foreach (var mod in Model)
-    {
-        <h2>@mod.EmpId</h2>
-        <h2>@mod.EmpName</h2>
-        <h2>@mod.Designation</h2>
-        <h2>@mod.Salary</h2>
-        <h2>----------</h2>
-    }
-} *@
-
-@* <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div> *@
-
-@* <table>
-    <tr>
-        <th>Roll No</th>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Standard</th>
-    </tr>
-    @{
-        foreach(var student in students)
-        {
-            <tr>
-                <th>@student.rollNo</th>
-                <th>@student.Name</th>
-                <th>@student.Gender</th>
-                <th>@student.Standard</th>
-            </tr>
-        }
-    }
-</table> *@
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.standard)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.standard)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

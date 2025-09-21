@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace ModelViewController.Models
@@ -10,17 +11,26 @@ namespace ModelViewController.Models
     public class StudentModel
     {
         //public int rollNo { get; set; }
-        [Required(ErrorMessage ="Please Enter Correct Name")]
+        //[Required(ErrorMessage ="Please Enter Correct Name")]
 
-        [StringLength(15, MinimumLength = 3)]
+        //[StringLength(15, MinimumLength = 3)]
+        [Key]
+        public int Id { get; set; }
+
+        //[EmailAddress]
+        [Column("StudentName",TypeName = "varchar(100)")]
         public string Name { get; set; }
 
-        [EmailAddress]
-        public string Email { get; set; }
+        //[Required(ErrorMessage = "Age is Must")]
+        //[Range(10, 50, ErrorMessage = "Age must between 10 and 50")]
+        [Column("StudentGender", TypeName = "varchar(20)")]
 
-        [Required(ErrorMessage = "Age is Must")]
-        [Range(10, 50, ErrorMessage = "Age must between 10 and 50")]
-        public int? Age { get; set; }
+        public string Gender { get; set; }
+
+        public int Age { get; set; }
+        
+
+        public int standard { get; set; }
 
         //[Required(ErrorMessage = "Password is Must")]
         //[RegularExpression("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "Password must contain 1 capital and 1 special character")]

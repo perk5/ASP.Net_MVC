@@ -7,15 +7,21 @@ namespace ModelViewController.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly StudentDBContext studentDB;
+
+        public HomeController(StudentDBContext studentDB)
+        {
+            this.studentDB = studentDB;
+        }
+        //private readonly ILogger<HomeController> _logger;
 
         //private readonly StudentRepository _studentRepository = null;
 
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-            //this._studentRepository = new StudentRepository();
-        }
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //    //this._studentRepository = new StudentRepository();
+        //}
 
         //public List<StudentModel> getAllStudents()
         //{
@@ -27,10 +33,10 @@ namespace ModelViewController.Controllers
         //    return _studentRepository.getStudentById(id);
         //}
 
-        
+
         public IActionResult Index()
         {
-
+            var stdData = studentDB.Students.ToList();
             //Employee emp = new Employee()
             //{
             //    EmpId = 101,
@@ -49,33 +55,33 @@ namespace ModelViewController.Controllers
             //var Emp = EmployeeModels;
 
             //ViewData["MyStudents"] = students;
-            return View();
+            return View(stdData);
         }
 
 
 
-        [HttpPost]
-        public IActionResult Index(StudentModel sm)
-        {
+        //[HttpPost]
+        //public IActionResult Index(StudentModel sm)
+        //{
 
-            if (ModelState.IsValid)
-            {
-                ModelState.Clear();
-            }
+        //    //if (ModelState.IsValid)
+        //    //{
+        //    //    ModelState.Clear();
+        //    //}
 
-            return View();
-            //return "Name: " + emp.Name + " Salary: " + emp.Salary + " Age: " + emp.Age + " Gender: " + emp.Gender + " Designation: " + emp.Designation + " Married: " + emp.Married + " Description: " + emp.Description;
-            //if (ModelState.IsValid)
-            //{
-            //    return "Form sent successfully Name is " + sm.Name;
-            //}
-            //else
-            //{
-            //    return "There was a problem sending the form....";
-            //}
+        //    //return View();
+        //    //return "Name: " + emp.Name + " Salary: " + emp.Salary + " Age: " + emp.Age + " Gender: " + emp.Gender + " Designation: " + emp.Designation + " Married: " + emp.Married + " Description: " + emp.Description;
+        //    //if (ModelState.IsValid)
+        //    //{
+        //    //    return "Form sent successfully Name is " + sm.Name;
+        //    //}
+        //    //else
+        //    //{
+        //    //    return "There was a problem sending the form....";
+        //    //}
 
                 
-        }
+        //}
 
         public string Details(int id,  string name)
         {
