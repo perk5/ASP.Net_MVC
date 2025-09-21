@@ -26,6 +26,14 @@ namespace ModelViewController.Models
         [RegularExpression("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "Password must contain 1 capital and 1 special character")]
         public string Password { get; set; }
 
+        [Required(ErrorMessage = "ConfirmPassword is must")]
+        [Compare("Password", ErrorMessage = "Both passwords must be identical")]
+        public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Url is must")]
+        [Url(ErrorMessage = "Invalid Url")]
+        public string WebsiteUrl { get; set; }
+       
         //public string Gender { get; set; }
 
         //public int Standard { get; set; }
