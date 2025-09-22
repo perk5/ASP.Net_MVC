@@ -35,6 +35,30 @@ namespace ModelViewController.Controllers
         //    return _studentRepository.getStudentById(id);
         //}
 
+        public IActionResult Index1()
+        {
+            HttpContext.Session.SetString("MyKey","SuperSimpleDev");
+            return View();
+        }
+
+        public IActionResult Index2()
+        {
+            if (HttpContext.Session.GetString("MyKey") != null)
+            {
+                ViewBag.Data = HttpContext.Session.GetString("MyKey").ToString();
+            }
+            return View();
+        }
+
+
+        public IActionResult Logout()
+        {
+            if (HttpContext.Session.GetString("MyKey") != null)
+            {
+                HttpContext.Session.Remove("MyKey");
+            }
+            return View();
+        }
 
         public async Task<IActionResult> Index()
         {
