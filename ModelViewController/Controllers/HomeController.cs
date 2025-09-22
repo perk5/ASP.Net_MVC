@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using ModelViewController.Models;
 //using ModelViewController.Repository;
 using System.Diagnostics;
@@ -34,9 +36,9 @@ namespace ModelViewController.Controllers
         //}
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var stdData = studentDB.Students.ToList();
+            var stdData = await studentDB.Students.ToListAsync();
             //Employee emp = new Employee()
             //{
             //    EmpId = 101,
@@ -58,42 +60,131 @@ namespace ModelViewController.Controllers
             return View(stdData);
         }
 
-
-
-        //[HttpPost]
-        //public IActionResult Index(StudentModel sm)
-        //{
-
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    //    ModelState.Clear();
-        //    //}
-
-        //    //return View();
-        //    //return "Name: " + emp.Name + " Salary: " + emp.Salary + " Age: " + emp.Age + " Gender: " + emp.Gender + " Designation: " + emp.Designation + " Married: " + emp.Married + " Description: " + emp.Description;
-        //    //if (ModelState.IsValid)
-        //    //{
-        //    //    return "Form sent successfully Name is " + sm.Name;
-        //    //}
-        //    //else
-        //    //{
-        //    //    return "There was a problem sending the form....";
-        //    //}
-
-                
-        //}
-
-        public string Details(int id,  string name)
+        public IActionResult Create()
         {
-            return "Id is: " + id + " Name is: " + name;
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(StudentModel sm)
+        {
+            if (ModelState.IsValid)
+            {
+                await studentDB.Students.AddAsync(sm);
+                await studentDB.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(sm);
         }
 
-        //public IActionResult Privacy()
-        //{
-        //    return View();
-        //}
+        public async Task<IActionResult> Details(int? id)
+        {
+            if(id == null || studentDB.Students == null)
+            {
+                return NotFound();
+            }
+            var Data = await studentDB.Students.Where(x => x.Id == id).FirstOrDefaultAsync();
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+            if (Data == null)
+            {
+                return NotFound();  
+            }
+            return View(Data);
+        }
+
+        public async Task<IActionResult> Edit(int? id)
+        {
+            var data = await studentDB.Students.FindAsync(id);      
+            return View(data);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int? id, StudentModel sm)
+        {
+            if (id != sm.Id)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                studentDB.Update(sm);
+                await studentDB.SaveChangesAsync();
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(sm);   
+        }
+
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if(id == null || studentDB.Students == null)
+            {
+                return NotFound();
+            }
+
+            var Data = await studentDB.Students.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (Data == null)
+            {
+                return NotFound();
+            }
+
+            return View(Data);
+            //studentDB.Remove(Data);
+            //await studentDB.SaveChangesAsync();
+            //return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int? id)
+        {
+            var stdData = await studentDB.Students.FindAsync(id);
+
+            if (stdData != null)
+            {
+                studentDB.Students.Remove(stdData);
+            }
+            await studentDB.SaveChangesAsync();
+            return RedirectToAction("Index", "Home");
+        }
+           
+
+
+            //[HttpPost]
+            //public IActionResult Index(StudentModel sm)
+            //{
+
+            //    //if (ModelState.IsValid)
+            //    //{
+            //    //    ModelState.Clear();
+            //    //}
+
+            //    //return View();
+            //    //return "Name: " + emp.Name + " Salary: " + emp.Salary + " Age: " + emp.Age + " Gender: " + emp.Gender + " Designation: " + emp.Designation + " Married: " + emp.Married + " Description: " + emp.Description;
+            //    //if (ModelState.IsValid)
+            //    //{
+            //    //    return "Form sent successfully Name is " + sm.Name;
+            //    //}
+            //    //else
+            //    //{
+            //    //    return "There was a problem sending the form....";
+            //    //}
+
+
+            //}
+
+            //public string Details(int id,  string name)
+            //{
+            //    return "Id is: " + id + " Name is: " + name;
+            //}
+
+            //public IActionResult Privacy()
+            //{
+            //    return View();
+            //}
+
+            [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });

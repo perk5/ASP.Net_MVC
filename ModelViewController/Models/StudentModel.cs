@@ -19,18 +19,19 @@ namespace ModelViewController.Models
 
         //[EmailAddress]
         [Column("StudentName",TypeName = "varchar(100)")]
+        [Required]
         public string Name { get; set; }
 
         //[Required(ErrorMessage = "Age is Must")]
         //[Range(10, 50, ErrorMessage = "Age must between 10 and 50")]
         [Column("StudentGender", TypeName = "varchar(20)")]
-
+        [Required]
         public string Gender { get; set; }
+        [Required]
+        public int? Age { get; set; }
 
-        public int Age { get; set; }
-        
-
-        public int standard { get; set; }
+        [Required]
+        public int? standard { get; set; }
 
         //[Required(ErrorMessage = "Password is Must")]
         //[RegularExpression("(?=^.{8,}$)((?=.*\\d)|(?=.*\\W+))(?![.\\n])(?=.*[A-Z])(?=.*[a-z]).*$", ErrorMessage = "Password must contain 1 capital and 1 special character")]
