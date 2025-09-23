@@ -1,12 +1,20 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using ModelViewController.Models;
 //using ModelViewController.Repository;
 using System.Diagnostics;
+using System.Net.Sockets;
 
 namespace ModelViewController.Controllers
 {
+
+    public enum Gender
+    {
+        Male,
+        Female
+    }
     public class HomeController : Controller
     {
         private readonly StudentDBContext studentDB;
@@ -35,10 +43,81 @@ namespace ModelViewController.Controllers
         //    return _studentRepository.getStudentById(id);
         //}
 
+        public StudentModel DDL()
+        {
+            StudentModel stdModel = new StudentModel();
+            stdModel.StudentsList = new List<SelectListItem>();
+
+            var data = studentDB.Students.ToList();
+
+            stdModel.StudentsList.Add(new SelectListItem
+            {
+                Text = "Select Name",
+                Value = ""
+            });
+
+            foreach (var item in data)
+            {
+                stdModel.StudentsList.Add(new SelectListItem
+                {
+                    Text = item.Name,
+                    Value = item.Id.ToString()
+                });
+            }
+            return stdModel;
+        }
+
+        
+
         public IActionResult Index1()
         {
+
+            //StudentModel stdModel = new StudentModel();
+            //stdModel.StudentsList = new List<SelectListItem>();
+
+            //var data = studentDB.Students.ToList();
+
+            //stdModel.StudentsList.Add(new SelectListItem
+            //{
+            //    Text = "Select Name",
+            //    Value = ""
+            //});
+
+            //foreach (var item in data)
+            //{
+            //    stdModel.StudentsList.Add(new SelectListItem
+            //    {
+            //        Text = item.Name,
+            //        Value = item.Id.ToString()
+            //    });
+            //}
+
+            var data = DDL();   
+
             HttpContext.Session.SetString("MyKey","SuperSimpleDev");
-            return View();
+
+            List<SelectListItem> Gender = new()
+            {
+                new SelectListItem {Value= "Male", Text="Male"},
+                new SelectListItem {Value= "Female", Text="Female"}
+            };
+            ViewBag.Gender = Gender;
+            return View(data);
+        }
+        [HttpPost]
+        public IActionResult Index1(StudentModel sm)
+        {
+            
+            if(sm != null)
+            {
+                sm = studentDB.Students.Where(x => x.Id == sm.Id).FirstOrDefault();
+            }
+            var data = DDL();
+            if(sm != null)
+            {
+                ViewBag.Name = sm.Name;
+            }
+            return View(data);
         }
 
         public IActionResult Index2()
@@ -86,18 +165,33 @@ namespace ModelViewController.Controllers
 
         public IActionResult Create()
         {
+            List<SelectListItem> Gender = new()
+            {
+                new SelectListItem {Value= "Male", Text="Male"},
+                new SelectListItem {Value= "Female", Text="Female"}
+            };
+            ViewBag.Gender = Gender;
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(StudentModel sm)
         {
+
+            List<SelectListItem> Gender = new()
+            {
+                new SelectListItem {Value= "Male", Text="Male"},
+                new SelectListItem {Value= "Female", Text="Female"}
+            };
+            ViewBag.Gender = Gender;
+
             if (ModelState.IsValid)
             {
                 await studentDB.Students.AddAsync(sm);
                 await studentDB.SaveChangesAsync();
                 return RedirectToAction("Index", "Home");
             }
+            
             return View(sm);
         }
 
@@ -118,6 +212,12 @@ namespace ModelViewController.Controllers
 
         public async Task<IActionResult> Edit(int? id)
         {
+            List<SelectListItem> Gender = new()
+            {
+                new SelectListItem {Value= "Male", Text="Male"},
+                new SelectListItem {Value= "Female", Text="Female"}
+            };
+            ViewBag.Gender = Gender;
             var data = await studentDB.Students.FindAsync(id);      
             return View(data);
         }
@@ -126,6 +226,12 @@ namespace ModelViewController.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int? id, StudentModel sm)
         {
+            List<SelectListItem> Gender = new()
+            {
+                new SelectListItem {Value= "Male", Text="Male"},
+                new SelectListItem {Value= "Female", Text="Female"}
+            };
+            ViewBag.Gender = Gender;                        
             if (id != sm.Id)
             {
                 return NotFound();

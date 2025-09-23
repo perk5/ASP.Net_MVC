@@ -1,5 +1,33 @@
-﻿
+﻿@model ModelViewController.Models.StudentModel
 @{
     ViewData["Title"] = "Index1";
 }
 <h1>Index1 Page</h1>
+
+<label class="form-label">Select Student Name: </label>
+@* @Html.DropDownList("Gender", 
+Html.GetEnumSelectList<ModelViewController.Controllers.Gender>(), "Select Gender", 
+new {@class = "form-control"}
+) *@
+
+@* @Html.DropDownList("Gender",
+ViewBag.Gender, "Select Gender",
+new { @class = "form-control" }
+) *@
+
+<form asp-action="Index1" asp-controller="Home" method="post">
+    <select asp-for="Id" asp-items="@(new SelectList(Model.StudentsList, "Value", "Text"))" class="form-control">
+    </select>
+    <br />
+    <input type="Submit" name="name" value="Submit" class="btn btn-primary" />
+</form>
+
+@{
+    if (ViewBag.Name != null)
+    {
+        <h2>Student Name is: @ViewBag.Name</h2>
+    }
+}
+
+
+

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,6 +17,9 @@ namespace ModelViewController.Models
         //[StringLength(15, MinimumLength = 3)]
         [Key]
         public int Id { get; set; }
+
+        [NotMapped]
+        public List<SelectListItem> StudentsList { get; set; }
 
         //[EmailAddress]
         [Column("StudentName",TypeName = "varchar(100)")]
