@@ -15,6 +15,9 @@ namespace ModelViewController.Controllers
         Male,
         Female
     }
+
+    
+
     public class HomeController : Controller
     {
         private readonly StudentDBContext studentDB;
@@ -42,6 +45,11 @@ namespace ModelViewController.Controllers
         //{
         //    return _studentRepository.getStudentById(id);
         //}
+
+        public IActionResult First()
+        {
+            return View();
+        }
 
         public StudentModel DDL()
         {
