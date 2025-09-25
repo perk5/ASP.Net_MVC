@@ -1,0 +1,11 @@
+﻿@model ModelViewController.Models.Product
+
+<div class="card" style="width: 18rem;" id="@Model.Id">
+    <img src="@(Model.Image)" asp-append-version="true" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="Name">@Model.Name</h5>
+        <p class="Description">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="Price">Price: @Model.Price</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+</div>

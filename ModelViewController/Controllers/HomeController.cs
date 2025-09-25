@@ -46,9 +46,15 @@ namespace ModelViewController.Controllers
         //    return _studentRepository.getStudentById(id);
         //}
 
-        public IActionResult First()
+        public IActionResult Products()
         {
-            return View();
+            List<Product> products = new List<Product>()
+            {
+                new Product() { Id=1, Name="picture1", Description="firstImage", Price=20.00, Image="~/images/profile_pic.png" },
+                new Product() { Id=2, Name="picture2", Description="secondImage", Price=40.00, Image="~/images/spider.png" }
+            };
+
+            return View(products);
         }
 
         public StudentModel DDL()
