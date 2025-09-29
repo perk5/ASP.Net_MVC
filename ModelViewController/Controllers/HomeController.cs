@@ -143,6 +143,11 @@ namespace ModelViewController.Controllers
             return View();
         }
 
+        public IActionResult Index3()
+        {
+            return View();
+        }
+
 
         public IActionResult Logout()
         {
