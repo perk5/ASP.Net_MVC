@@ -142,11 +142,38 @@ namespace ModelViewController.Controllers
             }
             return View();
         }
-
+        
         public IActionResult Index3()
         {
             return View();
         }
+        [HttpPost]
+        public int Add(int num1, int num2)
+        {
+            return num1 + num2;
+        }
+
+        [HttpPost]
+        public int Subtract(int num1, int num2)
+        {
+            return num1 - num2;
+        }
+
+        [HttpPost]
+        public Calculation Calculate(int num1, int num2)
+        {
+            Calculation c1 = new Calculation();
+
+            c1.Add = num1 + num2;
+            c1.Subtract = num1 - num2;
+            c1.Multiply = num1 * num2;
+            c1.Division = (double)num1 / num2;
+
+            return c1;
+
+        }
+
+
 
 
         public IActionResult Logout()
